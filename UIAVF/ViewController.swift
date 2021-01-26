@@ -9,9 +9,9 @@ import Cocoa
 import AVFoundation
 import CoreAudioKit
 
-func stuff() {
+func load_plugin(name: String) {
     let a = AVAudioUnitComponentManager.shared().components(passingTest: {
-        if $0.name.contains("Sylenth") {
+        if $0.name.contains(name) {
             $1.pointee = true
             return true
         }
@@ -26,14 +26,6 @@ func stuff() {
     instrument.auAudioUnit.requestViewController(completionHandler: {
         print($0)
     })
-//    AVAudioUnit.instantiate(with: desc, options: [], completionHandler: { (unit, err) in
-//        Swift.print("instantiated unit")
-//        print(err)
-//        unit!.auAudioUnit.requestViewController(completionHandler: { (c) in
-//            print("inner")
-//        })
-//    })
-    
 }
 
 
@@ -41,7 +33,7 @@ class ViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        stuff()
+        load_plugin(name: "Sylenth")
 
         // Do any additional setup after loading the view.
     }
